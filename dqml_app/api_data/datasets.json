@@ -1,44 +1,48 @@
 {
-    "datasets": [
-      {
-        "dataset_id": "1",
-        "catalog_ind": true,
-        "file_delim": ",",
-        "file_path": "APP_ROOT_DIR/data/source_data1.csv"
-      },
-      {
-        "dataset_id": "2",
-        "catalog_ind": true,
-        "file_delim": ",",
-        "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv", 
-        "dqml_mdl_features": [
-            {
-                "column": "account_id", 
-                "encoding": "frequency"
-            }, 
-            {
-                "column": "asset_id", 
-                "encoding": "one hot"
-            }, 
-            {
-                "column": "asset_value", 
-                "encoding": "numeric"
-            }
+  "datasets": [
+    {
+      "dataset_id": "1",
+      "catalog_ind": true,
+      "file_delim": ",",
+      "file_path": "APP_ROOT_DIR/data/source_data1.csv"
+    },
+    {
+      "dataset_id": "2",
+      "catalog_ind": true,
+      "file_delim": ",",
+      "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv",
+      "schedule_id": "2",
+      "dqml": {
+        "mdl_features": [
+          {
+            "column": "account_id",
+            "encoding": "frequency"
+          },
+          {
+            "column": "asset_id",
+            "encoding": "one hot"
+          },
+          {
+            "column": "asset_value",
+            "encoding": "numeric"
+          }
+        ],
+        "mdl_hist_data_dates": [
+          {
+            "snapshot": "t-1d"
+          },
+          {
+            "snapshot": "lme"
+          }
         ], 
-        "dqml_mdl_hist_dates": [
-            {
-                "hist_date_freq": "t-1d"
-            }, 
-            {
-                "hist_date_freq": "lme"
-            } 
-        ] 
-      },
-      {
-        "dataset_id": "3",
-        "catalog_ind": true,
-        "file_delim": ",",
-        "file_path": "APP_ROOT_DIR/data/customer.csv"
+        "sample_size": 10000
       }
-    ]
+    },
+    {
+      "dataset_id": "3",
+      "catalog_ind": true,
+      "file_delim": ",",
+      "file_path": "APP_ROOT_DIR/data/customer.csv"
+    }
+  ]
 }

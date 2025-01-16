@@ -1,32 +1,54 @@
-import pandas as pd 
-import datetime as dt 
-import xgboost as xgb 
-from sk_learn.model_selection import train_test_split 
-from shap import TreeExplainer 
+from dqml_app import settings as sc
 
-# import data 
-from data_access import sample as da 
-from feature_eng import features as fe 
-from explainability import explain as ex 
+import os
+import argparse
+import logging
 
-def detect_anomalies(table: str, time_column: str, cur_date: dt.date, prior_date: dt.date, sample_size: int) -> dict[str, float]:
-    # Get random samples of data for the specified dates
-    data_current = da.query_random_sample(table='ticket', time_column='listtime', eff_date=cur_date, sample_size=sample_size)
-    data_prior = da.query_random_sample(table='ticket', time_column='listtime', eff_date=prior_date, sample_size=sample_size)
-    
-    # Create a binary response variable indicating the date
-    y = [1] * len(data_current) + [0] * len(data_prior)
+from dqml_app import dqml_app_core as dqc
+from dqml_app.utils import logger as ufl
 
-    # Concatenate the data ensuring the order of concatenation 
-    data_all = pd.concat([data_current, data_prior], ignore_index=True)
-    
-    # Determine the features to build based on the data columns
-    feature_list = {
-        column: fe.determine_features(data_all, column) for column in data_all.columns 
-    } 
 
-    # Encode the features, here encode_feature returns a Dataframe 
-    encoded_features = [
-        fe.encode_feature(data_all, column, feature) for column, feature in feature_list 
-    ]
-    
+def main():
+    parser = argparse.ArgumentParser(description="Data Quality Validation ML Application")
+    parser.add_argument(
+        "-e", "--env", help="Environment", const="dev", nargs="?", default="dev"
+    )
+    parser.add_argument(
+        "-d",
+        "--dataset_id",
+        help="Source data",
+        const="1",
+        nargs="?",
+        default="1",
+        required=True,
+    )
+
+    # Sample invocation
+    # python dqml_app.py --env='dev' --dataset='2'
+
+    logging.info(f"Starting {script_name}")
+
+    # Get the arguments
+    args = vars(parser.parse_args())
+    logging.info(args)
+    env = args["env"]
+    src_dataset_id = args["dataset_id"]
+
+    logging.info(f"Set configs")
+    cfg = sc.load_config(env)
+    sc.set_config(cfg)
+    # print(sc.source_file_path)
+    logging.info(cfg)
+
+    dq_check_results = dqc.detect_anomalies(dataset_id=src_dataset_id)
+
+    print(f"DQ check results for dataset {src_dataset_id}")
+    print(dq_check_results)
+
+    logging.info(f"Finishing {script_name}")
+
+
+if __name__ == "__main__":
+    script_name = os.path.splitext(os.path.basename(__file__))[0]
+    ufl.config_logger(log_file_name=script_name)
+    main()
