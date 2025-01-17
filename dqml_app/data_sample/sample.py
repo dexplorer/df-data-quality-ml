@@ -2,17 +2,25 @@ import datetime as dt
 from dqml_app import dataset as ds 
 from dqml_app import settings as sc 
 from dqml_app.app_calendar import eff_date as ed 
+from dqml_app.utils import file_io as uff 
+import random 
+import pandas as pd 
 
-def query_random_sample(dataset_id: str, eff_date: dt.date):
+def query_random_sample(dataset: ds.Dataset, eff_date: dt.date) -> pd.DataFrame:
     # table: str, time_column: str, eff_date: dt.date, sample_size: int
 
     eff_date_str = ed.fmt_date_as_yyyymmdd(eff_date)
     src_file_path = sc.resolve_app_path(dataset.resolve_file_path(eff_date_str))
+    print(f"Reading the file {src_file_path}")
     src_file_records = uff.uf_read_delim_file_to_list_of_dict(file_path=src_file_path)
 
-    sample_size = dataset.sample_size
+    sample_size = dataset.model_parameters.sample_size
+    if sample_size < len(src_file_records): 
+        df = pd.DataFrame.from_dict(random.sample(src_file_records, sample_size)) 
+    else:
+        df = pd.DataFrame.from_dict(src_file_records)
 
-    return random.sample(src_file_records, sample_size)
+    return df
 
     # ticket_data_today = [
     #     {

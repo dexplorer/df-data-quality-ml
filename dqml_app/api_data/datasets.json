@@ -12,22 +12,28 @@
       "file_delim": ",",
       "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv",
       "schedule_id": "2",
-      "dqml": {
-        "mdl_features": [
+      "model_parameters": {
+        "features": [
           {
             "column": "account_id",
+            "variable_type": "category", 
+            "variable_sub_type": "nominal", 
             "encoding": "frequency"
           },
           {
             "column": "asset_id",
+            "variable_type": "category", 
+            "variable_sub_type": "nominal", 
             "encoding": "one hot"
           },
           {
             "column": "asset_value",
+            "variable_type": "numeric", 
+            "variable_sub_type": "float", 
             "encoding": "numeric"
           }
         ],
-        "mdl_hist_data_dates": [
+        "hist_data_snapshots": [
           {
             "snapshot": "t-1d"
           },

@@ -15,5 +15,6 @@ setuptools
 pandas
 datetime
 xgboost
-sklearn[model_selection]
+scikit-learn[model_selection]
+scikit-learn[pre_processing]
 shap 
