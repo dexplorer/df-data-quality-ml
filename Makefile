@@ -5,7 +5,7 @@ install:
 lint:
 	pylint --disable=R,C *.py &&\
 	pylint --disable=R,C dqml_app/*.py &&\
-	pylint --disable=R,C dqml_app/utils/*.py &&\
+	pylint --disable=R,C dqml_app/*/*.py &&\
 	pylint --disable=R,C dqml_app/tests/*.py
 	# pylint --disable=R,C dqml_app.py
 
@@ -16,7 +16,7 @@ test:
 format:
 	black *.py &&\
 	black dqml_app/*.py &&\
-	black dqml_app/utils/*.py &&\
+	black dqml_app/*/*.py &&\
 	black dqml_app/tests/*.py
 
 all:

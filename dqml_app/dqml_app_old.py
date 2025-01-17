@@ -9,7 +9,9 @@ from dqml_app.utils import logger as ufl
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Data Quality Validation ML Application")
+    parser = argparse.ArgumentParser(
+        description="Data Quality Validation ML Application"
+    )
     parser.add_argument(
         "-e", "--env", help="Environment", const="dev", nargs="?", default="dev"
     )

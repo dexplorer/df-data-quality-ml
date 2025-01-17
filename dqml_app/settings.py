@@ -41,11 +41,12 @@ def set_config(cfg):
 
     global api_data_path
     api_data_path = f"{resolve_app_path(cfg['api_data_path'])}"
-    logging.info(api_data_path)
 
     global api_datasets_file
     api_datasets_file = cfg["api_datasets_file"]
 
+    global plot_path
+    plot_path = f"{resolve_app_path(cfg['plot_path'])}"
 
 def resolve_app_path(rel_path):
     return rel_path.replace("APP_ROOT_DIR", APP_ROOT_DIR)

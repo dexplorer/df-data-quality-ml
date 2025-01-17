@@ -24,12 +24,12 @@ def detect_anomalies(dataset_id: str, env: str):
     sc.set_config(cfg)
 
     logging.info(f"Detecting anomalies in the dataset {dataset_id}")
-    dq_check_results = dqc.detect_anomalies(dataset_id=dataset_id)
+    column_scores = dqc.detect_anomalies(dataset_id=dataset_id)
 
-    click.echo(f"DQ check results for dataset {dataset_id}")
-    click.echo(dq_check_results)
+    click.echo(f"Anomalies found for dataset {dataset_id}")
+    click.echo(column_scores)
 
-    logging.info(f"Finished applying DQ rules on the dataset {dataset_id}")
+    logging.info(f"Finished detecting anomalies in the dataset {dataset_id}")
 
 
 # Create command group

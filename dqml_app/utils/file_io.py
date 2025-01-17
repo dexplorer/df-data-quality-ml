@@ -43,4 +43,3 @@ def uf_read_delim_file_to_list_of_dict(file_path: str, delim=",") -> list[dict]:
     except ValueError as error:
         logging.error(error)
         raise
-        

@@ -18,3 +18,4 @@ xgboost
 scikit-learn[model_selection]
 scikit-learn[pre_processing]
 shap 
+matplotlib

@@ -14,6 +14,6 @@ def dedupe_list_of_dict(records: list) -> list:
     deduped_items = [item_val for item_val in deduped_items_dict.values()]
     return deduped_items
 
+
 def flatten_list(xss: list):
     return [x for xs in xss for x in xs]
-    
