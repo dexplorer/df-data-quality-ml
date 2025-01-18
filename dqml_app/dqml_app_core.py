@@ -3,10 +3,6 @@ from datetime import datetime as dt
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 
-# from shap import TreeExplainer
-import shap
-import matplotlib.pyplot as plt
-
 from dqml_app import settings as sc
 from dqml_app import dataset as ds
 from dqml_app.app_calendar import eff_date as ed
@@ -41,6 +37,7 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
         ],
         ignore_index=True,
     )
+    print("Raw data")
     print(data_current)
     print(data_prior)
 
@@ -69,8 +66,10 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
 
     # Combine the encoded features into a single dataframe
     X = pd.concat(encoded_features, axis=1)
+    print("Features")
     print(X)
-    print(X.dtypes)
+    # print(X.dtypes)
+    print("Target Labels")
     print(y)
 
     # Split data into training and test/evaluation sets
@@ -88,29 +87,19 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
     data_for_prediction = X.loc[current_data_indices]
     # Get only a subset of observations for explainer
     # data_for_prediction = X.loc[current_data_indices].iloc[0:2]
+    print("Data (Features) for prediction")
     print(data_for_prediction)
 
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(data_for_prediction)
+    # Get tree explainer
+    explainer = ex.get_shap_tree_explainer(model)
+
+    #Get shap values
+    shap_values = ex.get_shap_values(explainer, data_for_prediction)
+    print("SHAP values")
     print(shap_values)
 
-    fig1, ax1 = plt.subplots()
-    ax1 = shap.summary_plot(shap_values, data_for_prediction, show=False)
-    summary_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_summary.png"
-    plt.savefig(summary_plot_file)
-    plt.clf()
-    plt.close()
-
-    # shap.initjs()
-    # shap.force_plot(explainer.expected_value, shap_values, data_for_prediction)
-    fig2, ax2 = plt.subplots()
-    ax2 = shap.force_plot(
-        explainer.expected_value, shap_values, data_for_prediction, show=False
-    )
-    force_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_force.png"
-    plt.savefig(force_plot_file)
-    plt.clf()
-    plt.close()
+    # Plot shap values
+    ex.plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id)
 
     # Compute anamoly scores for each column based on the SHAP values
     column_scores = ex.compute_column_scores(shap_values, feature_names=X.columns)

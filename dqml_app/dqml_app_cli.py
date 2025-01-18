@@ -26,7 +26,7 @@ def detect_anomalies(dataset_id: str, env: str):
     logging.info(f"Detecting anomalies in the dataset {dataset_id}")
     column_scores = dqc.detect_anomalies(dataset_id=dataset_id)
 
-    click.echo(f"Anomalies found for dataset {dataset_id}")
+    click.echo(f"Column/Feature scores for dataset {dataset_id}")
     click.echo(column_scores)
 
     logging.info(f"Finished detecting anomalies in the dataset {dataset_id}")

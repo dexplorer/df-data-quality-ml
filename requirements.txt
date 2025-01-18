@@ -8,9 +8,9 @@ ipython
 confuse
 setuptools
 # standard py app dist specific 
-#click 
-#fastapi 
-#uvicorn[standard] 
+click 
+fastapi 
+uvicorn[standard] 
 # app specific 
 pandas
 datetime

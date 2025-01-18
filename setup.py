@@ -12,6 +12,7 @@ setuptools.setup(
         "dqml_app.data_sample",
         "dqml_app.feature_eng",
         "dqml_app.explainability",
+        "dqml_app.app_calendar",
     ],
     # packages = find_packages(),
     install_requires=[
