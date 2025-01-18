@@ -207,7 +207,8 @@ Each column represent a feature. There are 4 features.
 #### SHAP value plots
 
 ##### Summary Plot (All Samples)
-![dataset_id_2_shap_summary](https://github.com/user-attachments/assets/a8d117ca-6d6a-4938-a389-564d596121d6)
+![dataset_id_2_shap_summary](https://github.com/dexplorer/df-data-quality-ml/blob/059049f136c6079da00e0d9bd038b333b33d2406/dqml_app/plot/dataset_id_2_shap_summary.png)
+
 
 "feature_name": "asset_value",
 
@@ -219,7 +220,8 @@ Each column represent a feature. There are 4 features.
 
 
 ##### Waterfall Plot (1 Sample) 
-![dataset_id_2_shap_waterfall](https://github.com/user-attachments/assets/a8d117ca-6d6a-4938-a389-564d596121d6)
+![dataset_id_2_shap_waterfall](https://github.com/dexplorer/df-data-quality-ml/blob/059049f136c6079da00e0d9bd038b333b33d2406/dqml_app/plot/dataset_id_2_shap_waterfall.png)
+
 
 "feature_name": "asset_value",
 

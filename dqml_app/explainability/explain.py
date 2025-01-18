@@ -23,7 +23,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     plt.clf()
     plt.close()
 
-    # Force plot a single data point
+    # Force plot for a single data point
     # shap.initjs()
     # shap.force_plot(explainer.expected_value, shap_values, data_for_prediction)
     fig2, ax2 = plt.subplots()
@@ -33,7 +33,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     plt.clf()
     plt.close()
 
-    # Waterfall plot a single explanation
+    # Waterfall plot for a single explanation
     fig3, ax3 = plt.subplots()
     explanation = explainer(data_for_prediction)
     # Print explanation object to see the values plotted in the waterfall plot
