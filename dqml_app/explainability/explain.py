@@ -27,8 +27,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     # shap.initjs()
     # shap.force_plot(explainer.expected_value, shap_values, data_for_prediction)
     fig2, ax2 = plt.subplots()
-    # ax2 = shap.force_plot(explainer.expected_value, shap_values, data_for_prediction, show=False)
-    ax2 = shap.force_plot(explainer.expected_value,shap_values[0,:], data_for_prediction.iloc[0], show=False, matplotlib=True)
+    ax2 = shap.force_plot(explainer.expected_value, shap_values[0,:], data_for_prediction.iloc[0], show=False, matplotlib=True)
     force_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_force.png"
     plt.savefig(force_plot_file, bbox_inches='tight')
     plt.clf()
@@ -36,14 +35,14 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
 
     # Waterfall plot a single explanation
     fig3, ax3 = plt.subplots()
-    exp = explainer(data_for_prediction)
-    # print(exp)
-    ax3 = shap.plots.waterfall(exp[0], show=False)
+    explanation = explainer(data_for_prediction)
+    # Print explanation object to see the values plotted in the waterfall plot
+    # print(explanation)
+    ax3 = shap.plots.waterfall(explanation[0], show=False)
     waterfall_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_waterfall.png"
     plt.savefig(waterfall_plot_file, bbox_inches='tight')
     plt.clf()
     plt.close()
-    
 
 def compute_column_scores(shap_values, feature_names: list):
     df = pd.DataFrame(shap_values, columns=feature_names)

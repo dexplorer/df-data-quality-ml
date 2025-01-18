@@ -209,8 +209,41 @@ Each column represent a feature. There are 4 features.
 ##### Summary Plot (All Samples)
 ![dataset_id_2_shap_summary](https://github.com/user-attachments/assets/a8d117ca-6d6a-4938-a389-564d596121d6)
 
+"feature_name": "asset_value",
+
+"mean_shap_value": 0.9110089540481567
+
+"feature_name": "account_id",
+
+"mean_shap_value": 0.20697076618671417
+
+
 ##### Waterfall Plot (1 Sample) 
 ![dataset_id_2_shap_waterfall](https://github.com/user-attachments/assets/a8d117ca-6d6a-4938-a389-564d596121d6)
+
+"feature_name": "asset_value",
+
+"feature_value": -1.02941176
+
+"shap_value": 0.8979624
+
+"feature_name": "account_id",
+
+"feature_value": 0.33333333
+
+"shap_value": -0.19850235
+
+"base_value": 0.7126187
+
+"predicted_value": 1.412 
+
+Calculation:
+
+predicted_value = base_value + shap_value for asset_value + shap_value for account_id 
+
+predicted_value = 0.7126187 +0.8979624 -0.19850235 = 1.41207875
+
+Note: Baseline value is calculated by SHAP assuming the features do not contribute to the prediction.
 
 #### Feature scores
 Feature importance scores are the average (mean) of absolute SHAP values for the feature/column.
@@ -237,3 +270,7 @@ Feature importance scores are the average (mean) of absolute SHAP values for the
   ]
 }
 ```
+
+#### Conclusion
+Feature scores indicate that the columns asset_value and asset_id are anomalies. 
+It is evident from the 2024-12-26 data that these 2 columns' have abnormal data. 

@@ -83,7 +83,6 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
 
     # Obtain SHAP values to explain the model's predictions
     current_data_indices = [idx for idx, label_val in enumerate(y) if label_val == 1]
-    # current_data_indices = [idx for idx, label_val in enumerate(y) if label_val == 1]
     data_for_prediction = X.loc[current_data_indices]
     # Get only a subset of observations for explainer
     # data_for_prediction = X.loc[current_data_indices].iloc[0:2]
