@@ -92,7 +92,7 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
     # Get tree explainer
     explainer = ex.get_shap_tree_explainer(model)
 
-    #Get shap values
+    # Get shap values
     shap_values = ex.get_shap_values(explainer, data_for_prediction)
     print("SHAP values")
     print(shap_values)

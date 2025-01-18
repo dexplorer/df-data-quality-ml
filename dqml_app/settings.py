@@ -48,5 +48,6 @@ def set_config(cfg):
     global plot_path
     plot_path = f"{resolve_app_path(cfg['plot_path'])}"
 
+
 def resolve_app_path(rel_path):
     return rel_path.replace("APP_ROOT_DIR", APP_ROOT_DIR)

@@ -51,6 +51,7 @@ def numeric_encoding(df: pd.DataFrame, column: str, feature: str):
     # return feature_df
     return normalize_numeric_feature(df=feature_df, column=column)
 
+
 def normalize_numeric_feature(df: pd.DataFrame, column: str):
     feature_df = df[column] / df[column].max()
     return feature_df
