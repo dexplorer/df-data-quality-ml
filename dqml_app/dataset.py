@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import json
-from dqml_app.utils import file_io as uff
+from utils import file_io as uff
 
 import logging
 

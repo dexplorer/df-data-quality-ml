@@ -19,3 +19,5 @@ scikit-learn[model_selection]
 scikit-learn[pre_processing]
 shap 
 matplotlib
+# my packages
+git+https://github.com/dexplorer/utils#egg=utils

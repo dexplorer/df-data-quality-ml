@@ -1,6 +1,6 @@
 from dqml_app import settings as sc
 from dqml_app import dqml_app_core as dqc
-from dqml_app.utils import logger as ufl
+from utils import logger as ufl
 import logging
 import os
 
@@ -26,9 +26,12 @@ async def detect_anomalies(dataset_id: str, env: str = "dev"):
     See ./log/dqml_app_cli.log for logs.
     """
 
-    logging.info(f"Set configs")
     cfg = sc.load_config(env)
     sc.set_config(cfg)
+
+    # script_name = os.path.splitext(os.path.basename(__file__))[0]
+    # ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
+    logging.info(f"Configs are set")
 
     logging.info(f"Start detecting anomalies in the dataset {dataset_id}")
     dq_results = dqc.detect_anomalies(dataset_id=dataset_id)
@@ -39,8 +42,6 @@ async def detect_anomalies(dataset_id: str, env: str = "dev"):
 
 
 if __name__ == "__main__":
-    script_name = os.path.splitext(os.path.basename(__file__))[0]
-    ufl.config_logger(log_file_name=script_name)
     uvicorn.run(
         app,
         port=8080,

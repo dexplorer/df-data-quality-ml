@@ -4,7 +4,7 @@ import os
 import click
 from dqml_app import settings as sc
 from dqml_app import dqml_app_core as dqc
-from dqml_app.utils import logger as ufl
+from utils import logger as ufl
 
 
 @click.command()
@@ -19,9 +19,12 @@ def detect_anomalies(dataset_id: str, env: str):
     See ./log/dqml_app_cli.log for logs.
     """
 
-    logging.info(f"Set configs")
     cfg = sc.load_config(env)
     sc.set_config(cfg)
+
+    script_name = os.path.splitext(os.path.basename(__file__))[0]
+    ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
+    logging.info(f"Configs are set")
 
     logging.info(f"Detecting anomalies in the dataset {dataset_id}")
     column_scores = dqc.detect_anomalies(dataset_id=dataset_id)
@@ -43,8 +46,6 @@ cli.add_command(detect_anomalies)
 
 
 def main():
-    script_name = os.path.splitext(os.path.basename(__file__))[0]
-    ufl.config_logger(log_file_name=script_name)
     cli()
 
 

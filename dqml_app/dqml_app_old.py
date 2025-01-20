@@ -5,7 +5,7 @@ import argparse
 import logging
 
 from dqml_app import dqml_app_core as dqc
-from dqml_app.utils import logger as ufl
+from utils import logger as ufl
 
 
 def main():
@@ -36,10 +36,13 @@ def main():
     env = args["env"]
     src_dataset_id = args["dataset_id"]
 
-    logging.info(f"Set configs")
     cfg = sc.load_config(env)
     sc.set_config(cfg)
     # print(sc.source_file_path)
+
+    script_name = os.path.splitext(os.path.basename(__file__))[0]
+    ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
+    logging.info(f"Configs are set")
     logging.info(cfg)
 
     dq_check_results = dqc.detect_anomalies(dataset_id=src_dataset_id)
@@ -51,6 +54,4 @@ def main():
 
 
 if __name__ == "__main__":
-    script_name = os.path.splitext(os.path.basename(__file__))[0]
-    ufl.config_logger(log_file_name=script_name)
     main()
