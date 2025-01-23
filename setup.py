@@ -17,7 +17,8 @@ setuptools.setup(
     # packages = find_packages(),
     install_requires=[
         "setuptools",
-        'utils@git+https://github.com/dexplorer/utils#egg=utils-1.0.0',
+        "utils@git+https://github.com/dexplorer/utils#egg=utils-1.0.0",
+        "metadata@git+https://github.com/dexplorer/df-metadata#egg=metadata-1.0.0",
     ],
     python_requires=">=3.12",
 )

@@ -1,5 +1,5 @@
 import datetime as dt
-from dqml_app import dataset as ds
+from metadata import dataset as ds
 from dqml_app import settings as sc
 from dqml_app.app_calendar import eff_date as ed
 from utils import file_io as uff

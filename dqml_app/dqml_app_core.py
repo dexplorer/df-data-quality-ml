@@ -4,7 +4,7 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 
 from dqml_app import settings as sc
-from dqml_app import dataset as ds
+from metadata import dataset as ds
 from dqml_app.app_calendar import eff_date as ed
 
 # import data

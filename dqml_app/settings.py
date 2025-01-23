@@ -5,13 +5,14 @@ import logging
 config = confuse.Configuration("dqml_app", __name__)
 
 global APP_ROOT_DIR
-APP_ROOT_DIR = f"/workspaces/df-data-quality-ml/dqml_app"
+APP_ROOT_DIR = "/workspaces/df-data-quality-ml/dqml_app"
 
 # Define config variables at module scope
 log_file_path = ""
 source_file_path = ""
 api_data_path = ""
 api_datasets_file = ""
+plot_path = ""
 
 
 def load_config(env):

@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 
-from dqml_app import dataset as ds
+from metadata import dataset as ds
 
 
 def determine_features(data_all: pd.DataFrame, column: str, dataset: ds.Dataset):

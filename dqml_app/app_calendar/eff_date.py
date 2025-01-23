@@ -1,5 +1,5 @@
 from datetime import datetime as dt
-from dqml_app import dataset as ds
+from metadata import dataset as ds
 
 
 def get_cur_eff_date(schedule_id: str) -> dt.date:

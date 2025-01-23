@@ -21,3 +21,4 @@ shap
 matplotlib
 # my packages
 git+https://github.com/dexplorer/utils#egg=utils
+git+https://github.com/dexplorer/df-metadata#egg=metadata
