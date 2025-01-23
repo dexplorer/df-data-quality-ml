@@ -28,6 +28,8 @@ def main():
     # Sample invocation
     # python dqml_app.py --env='dev' --dataset='2'
 
+    script_name = os.path.splitext(os.path.basename(__file__))[0]
+
     logging.info(f"Starting {script_name}")
 
     # Get the arguments
@@ -40,7 +42,6 @@ def main():
     sc.set_config(cfg)
     # print(sc.source_file_path)
 
-    script_name = os.path.splitext(os.path.basename(__file__))[0]
     ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
     logging.info(f"Configs are set")
     logging.info(cfg)

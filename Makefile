@@ -20,5 +20,4 @@ format:
 	black dqml_app/*/*.py &&\
 	black dqml_app/tests/*.py
 
-all:
-	install setup lint format test
+all: install setup lint format test
