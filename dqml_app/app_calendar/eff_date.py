@@ -1,13 +1,14 @@
 from datetime import datetime as dt
 from metadata import dataset as ds
 
+import logging
 
 def get_cur_eff_date(schedule_id: str) -> dt.date:
     return dt.strptime("2024-12-26", "%Y-%m-%d")
 
 
 def get_prior_eff_date(cur_eff_date: dt.date, snapshot: str) -> dt.date:
-    print(f"prior snapshot - {snapshot}")
+    logging.debug("prior snapshot - %s", snapshot)
 
     if cur_eff_date == dt.strptime("2024-12-26", "%Y-%m-%d"):
         if snapshot == "t-1d":
@@ -30,5 +31,5 @@ def get_prior_eff_dates(schedule_id: str, snapshots: list[ds.DataSnapshot]):
     prior_eff_dates = [
         get_prior_eff_date(cur_eff_date, snapshot.snapshot) for snapshot in snapshots
     ]
-    print(prior_eff_dates)
+    logging.debug("Prior effective dates - %s", prior_eff_dates)
     return prior_eff_dates

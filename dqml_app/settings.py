@@ -10,8 +10,6 @@ APP_ROOT_DIR = "/workspaces/df-data-quality-ml/dqml_app"
 # Define config variables at module scope
 log_file_path = ""
 source_file_path = ""
-api_data_path = ""
-api_datasets_file = ""
 plot_path = ""
 
 
@@ -43,12 +41,6 @@ def set_config(cfg):
 
     global source_file_path
     source_file_path = f"{resolve_app_path(cfg['source_file_path'])}"
-
-    global api_data_path
-    api_data_path = f"{resolve_app_path(cfg['api_data_path'])}"
-
-    global api_datasets_file
-    api_datasets_file = cfg["api_datasets_file"]
 
     global plot_path
     plot_path = f"{resolve_app_path(cfg['plot_path'])}"

@@ -1,9 +1,7 @@
 import pandas as pd
-from datetime import datetime as dt
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 
-from dqml_app import settings as sc
 from metadata import dataset as ds
 from dqml_app.app_calendar import eff_date as ed
 
@@ -12,13 +10,11 @@ from dqml_app.data_sample import sample as da
 from dqml_app.feature_eng import features as fe
 from dqml_app.explainability import explain as ex
 
+import logging
 
 def detect_anomalies(dataset_id: str) -> dict[str, float]:
     # Get dataset metadata
-    datasets_json_file = f"{sc.api_data_path}/{sc.api_datasets_file}"
-    dataset = ds.LocalDelimFileDataset.from_json(
-        datasets_json_file, "datasets", dataset_id
-    )
+    dataset = ds.LocalDelimFileDataset.from_json(dataset_id)
 
     # Get current effective date
     cur_date = ed.get_cur_eff_date(schedule_id=dataset.schedule_id)
@@ -37,9 +33,9 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
         ],
         ignore_index=True,
     )
-    print("Raw data")
-    print(data_current)
-    print(data_prior)
+    logging.debug("Raw data")
+    logging.debug(data_current)
+    logging.debug(data_prior)
 
     # Create a binary response variable indicating the date
     y = [1] * len(data_current) + [0] * len(data_prior)
@@ -55,7 +51,7 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
         )
         for column in data_all.columns
     ]
-    # print(feature_list)
+    # logging.debug(feature_list)
 
     # Encode the features, here encode_feature returns a Dataframe
     encoded_features = [
@@ -66,11 +62,11 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
 
     # Combine the encoded features into a single dataframe
     X = pd.concat(encoded_features, axis=1)
-    print("Features")
-    print(X)
-    # print(X.dtypes)
-    print("Target Labels")
-    print(y)
+    logging.debug("Features")
+    logging.debug(X)
+    # logging.debug(X.dtypes)
+    logging.debug("Target Labels")
+    logging.debug(y)
 
     # Split data into training and test/evaluation sets
     X_train, X_eval, y_train, y_eval = train_test_split(
@@ -86,16 +82,16 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
     data_for_prediction = X.loc[current_data_indices]
     # Get only a subset of observations for explainer
     # data_for_prediction = X.loc[current_data_indices].iloc[0:2]
-    print("Data (Features) for prediction")
-    print(data_for_prediction)
+    logging.debug("Data (Features) for prediction")
+    logging.debug(data_for_prediction)
 
     # Get tree explainer
     explainer = ex.get_shap_tree_explainer(model)
 
     # Get shap values
     shap_values = ex.get_shap_values(explainer, data_for_prediction)
-    print("SHAP values")
-    print(shap_values)
+    logging.debug("SHAP values")
+    logging.debug(shap_values)
 
     # Plot shap values
     ex.plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id)

@@ -30,7 +30,7 @@ def main():
 
     script_name = os.path.splitext(os.path.basename(__file__))[0]
 
-    logging.info(f"Starting {script_name}")
+    logging.info("Starting %s", script_name)
 
     # Get the arguments
     args = vars(parser.parse_args())
@@ -40,18 +40,18 @@ def main():
 
     cfg = sc.load_config(env)
     sc.set_config(cfg)
-    # print(sc.source_file_path)
+    # logging.debugsc.source_file_path)
 
     ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
-    logging.info(f"Configs are set")
+    logging.info("Configs are set")
     logging.info(cfg)
 
     dq_check_results = dqc.detect_anomalies(dataset_id=src_dataset_id)
 
-    print(f"DQ check results for dataset {src_dataset_id}")
-    print(dq_check_results)
+    logging.debug("DQ check results for dataset %s", src_dataset_id)
+    logging.debug(dq_check_results)
 
-    logging.info(f"Finishing {script_name}")
+    logging.info("Finishing %s", script_name)
 
 
 if __name__ == "__main__":

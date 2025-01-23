@@ -24,15 +24,15 @@ def detect_anomalies(dataset_id: str, env: str):
 
     script_name = os.path.splitext(os.path.basename(__file__))[0]
     ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
-    logging.info(f"Configs are set")
+    logging.info("Configs are set")
 
-    logging.info(f"Detecting anomalies in the dataset {dataset_id}")
+    logging.info("Detecting anomalies in the dataset %s", dataset_id)
     column_scores = dqc.detect_anomalies(dataset_id=dataset_id)
 
-    click.echo(f"Column/Feature scores for dataset {dataset_id}")
-    click.echo(column_scores)
+    logging.debug("Column/Feature scores for dataset %s", dataset_id)
+    logging.debug(column_scores)
 
-    logging.info(f"Finished detecting anomalies in the dataset {dataset_id}")
+    logging.info("Finished detecting anomalies in the dataset %s", dataset_id)
 
 
 # Create command group

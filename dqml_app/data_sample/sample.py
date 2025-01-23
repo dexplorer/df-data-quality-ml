@@ -5,6 +5,7 @@ from dqml_app.app_calendar import eff_date as ed
 from utils import file_io as uff
 import random
 import pandas as pd
+import logging
 
 
 def query_random_sample(dataset: ds.Dataset, eff_date: dt.date) -> pd.DataFrame:
@@ -12,7 +13,7 @@ def query_random_sample(dataset: ds.Dataset, eff_date: dt.date) -> pd.DataFrame:
 
     eff_date_str = ed.fmt_date_as_yyyymmdd(eff_date)
     src_file_path = sc.resolve_app_path(dataset.resolve_file_path(eff_date_str))
-    print(f"Reading the file {src_file_path}")
+    logging.debug("Reading the file {src_file_path}")
     src_file_records = uff.uf_read_delim_file_to_list_of_dict(file_path=src_file_path)
 
     sample_size = dataset.model_parameters.sample_size

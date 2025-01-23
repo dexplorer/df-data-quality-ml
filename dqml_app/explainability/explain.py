@@ -49,7 +49,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     fig3, ax3 = plt.subplots()
     explanation = explainer(data_for_prediction)
     # Print explanation object to see the values plotted in the waterfall plot
-    # print(explanation)
+    # logging.debugexplanation)
     ax3 = shap.plots.waterfall(explanation[0], show=False)
     waterfall_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_waterfall.png"
     plt.savefig(waterfall_plot_file, bbox_inches="tight")

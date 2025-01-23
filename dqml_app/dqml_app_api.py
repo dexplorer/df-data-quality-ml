@@ -1,8 +1,6 @@
 from dqml_app import settings as sc
 from dqml_app import dqml_app_core as dqc
-from utils import logger as ufl
 import logging
-import os
 
 from fastapi import FastAPI
 import uvicorn
@@ -31,12 +29,12 @@ async def detect_anomalies(dataset_id: str, env: str = "dev"):
 
     # script_name = os.path.splitext(os.path.basename(__file__))[0]
     # ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")
-    logging.info(f"Configs are set")
+    logging.info("Configs are set")
 
-    logging.info(f"Start detecting anomalies in the dataset {dataset_id}")
+    logging.info("Start detecting anomalies in the dataset %s", dataset_id)
     dq_results = dqc.detect_anomalies(dataset_id=dataset_id)
 
-    logging.info(f"Finished detecting anomalies in the dataset {dataset_id}")
+    logging.info("Finished detecting anomalies in the dataset %s", dataset_id)
 
     return {"results": dq_results}
 
