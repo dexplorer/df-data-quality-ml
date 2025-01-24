@@ -19,7 +19,7 @@ setuptools.setup(
         "setuptools",
         "requests", 
         "utils@git+https://github.com/dexplorer/utils#egg=utils-1.0.1",
-        "metadata@git+https://github.com/dexplorer/df-metadata#egg=metadata-1.0.3",
+        "metadata@git+https://github.com/dexplorer/df-metadata#egg=metadata-1.0.4",
     ],
     python_requires=">=3.12",
 )

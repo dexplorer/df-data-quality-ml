@@ -16,7 +16,6 @@ from utils import logger as ufl
 def detect_anomalies(dataset_id: str, env: str):
     """
     Detect anomalies in the dataset.
-    See ./log/dqml_app_cli.log for logs.
     """
 
     cfg = sc.load_config(env)
