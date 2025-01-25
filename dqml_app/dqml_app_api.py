@@ -32,11 +32,11 @@ async def detect_anomalies(dataset_id: str, env: str = "dev"):
     logging.info("Configs are set")
 
     logging.info("Start detecting anomalies in the dataset %s", dataset_id)
-    dq_results = dqc.detect_anomalies(dataset_id=dataset_id)
+    column_scores = dqc.detect_anomalies(dataset_id=dataset_id)
 
     logging.info("Finished detecting anomalies in the dataset %s", dataset_id)
 
-    return {"results": dq_results}
+    return {"results": column_scores}
 
 
 if __name__ == "__main__":
