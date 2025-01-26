@@ -21,7 +21,6 @@ async def root():
 async def detect_anomalies(dataset_id: str, env: str = "dev"):
     """
     Detect anomalies in the dataset.
-    See ./log/dqml_app_cli.log for logs.
     """
 
     cfg = sc.load_config(env)
@@ -45,4 +44,5 @@ if __name__ == "__main__":
         port=8080,
         host="0.0.0.0",
         log_config=f"{sc.APP_ROOT_DIR}/cfg/dqml_app_api_log.ini",
+        # reload=True,
     )

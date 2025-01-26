@@ -13,7 +13,7 @@ def query_random_sample(dataset: ds.Dataset, eff_date: str) -> pd.DataFrame:
 
     eff_date_yyyymmdd = ed.fmt_date_str_as_yyyymmdd(eff_date)
     src_file_path = sc.resolve_app_path(dataset.resolve_file_path(eff_date_yyyymmdd))
-    logging.debug("Reading the file {src_file_path}")
+    logging.info("Reading the file %s", src_file_path)
     src_file_records = uff.uf_read_delim_file_to_list_of_dict(file_path=src_file_path)
 
     sample_size = dataset.model_parameters.sample_size

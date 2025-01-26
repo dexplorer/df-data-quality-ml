@@ -1,5 +1,8 @@
 # df-data-quality-ml
 
+This application implements an ML model to detect anomalies in the datasets. ML model is a Gradient Boosting Decision Tree Classifier. It tries to classify the data records as current vs prior day data. Anomalies are detected when the model classifies any record as current day data (i.e. they look different from the prior day snapshots of the same dataset).
+Model output is explained using SHAP values and plots. Application can be invoked using CLI or REST API end points. This allows the app to be integrated into a larger data ingestion / distribution framework.
+
 ### Install
 
 - **Install via setuptools**:
@@ -48,20 +51,20 @@ effective_date,account_id,asset_id,asset_value
 2024-12-26,ACC9,1,-5000
 ```
 
-  ##### Dataset (acct_positions_20241225.csv)
+  ##### Dataset (acct_positions_20241224.csv)
 ```
 effective_date,account_id,asset_id,asset_value
-2024-12-25,ACC1,1,34000
-2024-12-25,ACC1,2,14500
-2024-12-25,ACC2,2,13000
-2024-12-25,ACC3,1,10000
+2024-12-24,ACC1,1,34000
+2024-12-24,ACC1,2,14500
+2024-12-24,ACC2,2,13000
+2024-12-24,ACC3,1,10000
 ```
 
   ##### Dataset (acct_positions_20241130.csv)
 ```
 effective_date,account_id,asset_id,asset_value
-2024-11-30,ACC1,1,30000
-2024-11-30,ACC2,2,15000
+2024-11-29,ACC1,1,30000
+2024-11-29,ACC2,2,15000
 ```
 
 ### API Data (simulated)
@@ -70,47 +73,66 @@ These are metadata that would be captured via the DQ application UI and stored i
   ##### datasets 
 ```
 {
-  "datasets": [
-    {
-      "dataset_id": "2",
-      "catalog_ind": true,
-      "file_delim": ",",
-      "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv",
-      "schedule_id": "2",
-      "model_parameters": {
-        "features": [
-          {
-            "column": "account_id",
-            "variable_type": "category", 
-            "variable_sub_type": "nominal", 
-            "encoding": "frequency"
-          },
-          {
-            "column": "asset_id",
-            "variable_type": "category", 
-            "variable_sub_type": "nominal", 
-            "encoding": "one hot"
-          },
-          {
-            "column": "asset_value",
-            "variable_type": "numeric", 
-            "variable_sub_type": "float", 
-            "encoding": "numeric"
-          }
-        ],
-        "hist_data_snapshots": [
-          {
-            "snapshot": "t-1d"
-          },
-          {
-            "snapshot": "lme"
-          }
-        ], 
-        "sample_size": 10000
+    "datasets": [
+      {
+        "dataset_id": "1",
+        "catalog_ind": true,
+        "file_delim": ",",
+        "file_path": "APP_ROOT_DIR/data/assets.csv",
+        "schedule_id": null, 
+        "dq_rule_ids": null, 
+        "model_parameters": null 
+      },
+      {
+        "dataset_id": "2",
+        "catalog_ind": true,
+        "file_delim": ",",
+        "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv",
+        "schedule_id": "2",
+        "dq_rule_ids": [], 
+        "model_parameters": {
+          "features": [
+            {
+              "column": "account_id",
+              "variable_type": "category",
+              "variable_sub_type": "nominal",
+              "encoding": "frequency"
+            },
+            {
+              "column": "asset_id",
+              "variable_type": "category",
+              "variable_sub_type": "nominal",
+              "encoding": "one hot"
+            },
+            {
+              "column": "asset_value",
+              "variable_type": "numeric",
+              "variable_sub_type": "float",
+              "encoding": "numeric"
+            }
+          ],
+          "hist_data_snapshots": [
+            {
+              "snapshot": "t-1d"
+            },
+            {
+              "snapshot": "lme"
+            }
+          ],
+          "sample_size": 10000
+        }
+      },
+      {
+        "dataset_id": "3",
+        "catalog_ind": true,
+        "file_delim": ",",
+        "file_path": "APP_ROOT_DIR/data/customer.csv", 
+        "schedule_id": null, 
+        "dq_rule_ids": null, 
+        "model_parameters": null 
       }
-    }
-  ]
-}
+    ]
+  }
 ```
 
 ### Sample Output 
@@ -128,12 +150,12 @@ These are metadata that would be captured via the DQ application UI and stored i
 7     2024-12-26       ACC8        1       -5000
 8     2024-12-26       ACC9        1       -5000
   effective_date account_id asset_id asset_value
-0     2024-12-25       ACC1        1       34000
-1     2024-12-25       ACC1        2       14500
-2     2024-12-25       ACC2        2       13000
-3     2024-12-25       ACC3        1       10000
-4     2024-11-30       ACC1        1       30000
-5     2024-11-30       ACC2        2       15000
+0     2024-12-24       ACC1        1       34000
+1     2024-12-24       ACC1        2       14500
+2     2024-12-24       ACC2        2       13000
+3     2024-12-24       ACC3        1       10000
+4     2024-11-29       ACC1        1       30000
+5     2024-11-29       ACC2        2       15000
 ```
 
 #### Features

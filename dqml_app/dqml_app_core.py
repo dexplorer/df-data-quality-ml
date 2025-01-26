@@ -19,7 +19,8 @@ def detect_anomalies(dataset_id: str) -> dict[str, float]:
 
     # Get current effective date
     cur_date = ed.get_cur_eff_date(schedule_id=dataset.schedule_id)
-    # Get current effective date
+
+    # Get prior effective dates
     prior_dates = ed.get_prior_eff_dates(
         schedule_id=dataset.schedule_id,
         snapshots=dataset.model_parameters.hist_data_snapshots,
