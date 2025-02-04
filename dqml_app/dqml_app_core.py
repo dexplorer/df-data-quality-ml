@@ -13,17 +13,21 @@ from dqml_app.explainability import explain as ex
 import logging
 
 
-def detect_anomalies(dataset_id: str) -> dict[str, float]:
+def detect_anomalies(dataset_id: str, cycle_date: str) -> dict[str, float]:
     # Get dataset metadata
-    dataset = ds.LocalDelimFileDataset.from_json(dataset_id)
+    # dataset = ds.LocalDelimFileDataset.from_json(dataset_id)
+    dataset = ds.get_dataset_from_json(dataset_id=dataset_id)
 
     # Get current effective date
-    cur_date = ed.get_cur_eff_date(schedule_id=dataset.schedule_id)
+    cur_date = ed.get_cur_eff_date(
+        schedule_id=dataset.schedule_id, cycle_date=cycle_date
+    )
 
     # Get prior effective dates
     prior_dates = ed.get_prior_eff_dates(
         schedule_id=dataset.schedule_id,
         snapshots=dataset.model_parameters.hist_data_snapshots,
+        cycle_date=cycle_date,
     )
 
     # Get random samples of data for the specified dates
