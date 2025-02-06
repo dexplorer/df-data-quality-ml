@@ -1,6 +1,6 @@
-import datetime as dt
+# import datetime as dt
 from metadata import dataset as ds
-from dqml_app import settings as sc
+from dqml_app.settings import ConfigParms as sc
 from app_calendar import eff_date as ed
 from utils import file_io as uff
 from utils import spark_io as ufs
@@ -31,7 +31,7 @@ def query_random_sample(dataset: ds.Dataset, eff_date: str) -> pd.DataFrame:
         logging.info("Reading the spark table %s", qual_target_table_name)
         src_data_records = ufs.read_spark_table_into_list_of_dict(
             qual_target_table_name=qual_target_table_name,
-            cur_eff_date=cur_eff_date,
+            cur_eff_date=eff_date,
             warehouse_path=sc.warehouse_path,
         )
 

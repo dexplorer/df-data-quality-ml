@@ -5,9 +5,10 @@ Model output is explained using SHAP values and plots. Application can be invoke
 
 ### Install
 
-- **Install via setuptools**:
+- **Install via Makefile and pip**:
   ```sh
-    python setup.py install
+    make install
+    make setup
   ```
 
 ### Usage Examples
@@ -20,19 +21,20 @@ Model output is explained using SHAP values and plots. Application can be invoke
 - **Apply DQ rules on a dataset via API**:
   ##### Start the API server
   ```sh
-    python dqml_app/dqml_app_api.py
+    python dqml_app/dqml_app_api.py --env "dev"
   ```
   ##### Invoke the API endpoint
   ```sh
-    https://<host name with port number>/detect-anomalies/{dataset_id}
-    https://<host name with port number>/detect-anomalies/2
+    https://<host name with port number>/detect-anomalies/?dataset_id=<value>
+    https://<host name with port number>/detect-anomalies/?dataset_id=<value>&cycle_date=<value>
+
+    /detect-anomalies/?dataset_id=2
+    /detect-anomalies/?dataset_id=2&cycle_date=2024-12-26
   ```
   ##### Invoke the API from Swagger Docs interface
   ```sh
     https://<host name with port number>/docs
 
-    /detect-anomalies/{dataset_id}
-    /detect-anomalies/2
   ```
 
 ### Sample Input

@@ -2,7 +2,7 @@ import logging
 import os
 
 import click
-from dqml_app import settings as sc
+from dqml_app.settings import ConfigParms as sc
 from dqml_app import dqml_app_core as dqc
 from utils import logger as ufl
 

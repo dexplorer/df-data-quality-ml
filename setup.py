@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="dqml_app",
-    version="1.0.2",
+    version="1.0.3",
     scripts=["./scripts/dqml_app"],
     author="Rajakumaran Arivumani",
     description="Data quality ml app install.",
@@ -17,7 +17,7 @@ setuptools.setup(
     install_requires=[
         "setuptools",
         "requests",
-        "utils@git+https://github.com/dexplorer/utils#egg=utils-1.0.2",
+        "utils@git+https://github.com/dexplorer/utils#egg=utils-1.0.3",
         "metadata@git+https://github.com/dexplorer/df-metadata#egg=metadata-1.0.9",
         "app_calendar@git+https://github.com/dexplorer/df-app-calendar#egg=app_calendar-1.0.2",
     ],
