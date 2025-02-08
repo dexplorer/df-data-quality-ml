@@ -47,7 +47,7 @@ async def detect_anomalies(dataset_id: str, cycle_date: str = ""):
     return {"results": column_scores}
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(
         description="Data Quality Machine Learning Application"
     )
@@ -77,3 +77,7 @@ if __name__ == "__main__":
     )
 
     logging.info("Stopping the API service")
+
+
+if __name__ == "__main__":
+    main()

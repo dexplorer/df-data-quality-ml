@@ -53,7 +53,7 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> dict[str, float]:
     feature_list = [
         (
             column,
-            fe.determine_features(data_all=data_all, column=column, dataset=dataset),
+            fe.determine_features(column=column, dataset=dataset),
         )
         for column in data_all.columns
     ]

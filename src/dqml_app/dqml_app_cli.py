@@ -7,8 +7,13 @@ from dqml_app import dqml_app_core as dqc
 from utils import logger as ufl
 
 
-@click.command()
-# @click.argument('dataset_id', required=1)
+# Create command group
+@click.group()
+def cli():
+    pass
+
+
+@cli.command()
 @click.option(
     "--dataset_id", type=str, default="dev", help="Source dataset id", required=True
 )
@@ -32,16 +37,6 @@ def detect_anomalies(dataset_id: str, env: str, cycle_date: str):
     logging.info(column_scores)
 
     logging.info("Finished detecting anomalies in the dataset %s", dataset_id)
-
-
-# Create command group
-@click.group()
-def cli():
-    pass
-
-
-# Add sub command to group
-cli.add_command(detect_anomalies)
 
 
 def main():

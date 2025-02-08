@@ -2,7 +2,7 @@ import confuse
 
 import logging
 
-APP_ROOT_DIR = "/workspaces/df-data-quality-ml/dqml_app"
+APP_ROOT_DIR = "/workspaces/df-data-quality-ml"
 
 
 class ConfigParms:

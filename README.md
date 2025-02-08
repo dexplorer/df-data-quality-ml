@@ -8,20 +8,24 @@ Model output is explained using SHAP values and plots. Application can be invoke
 - **Install via Makefile and pip**:
   ```sh
     make install
-    make setup
   ```
 
 ### Usage Examples
 
 - **Apply DQ rules on a dataset via CLI**:
   ```sh
-    dqml_app detect-anomalies --dataset_id "2" --env "dev"
+    dqml-app-cli detect-anomalies --dataset_id "2" --env "dev"
+  ```
+
+- **Apply DQ rules on a dataset via CLI with cycle date override**:
+  ```sh
+    dqml-app-cli detect-anomalies --dataset_id "2" --env "dev" --cycle_date "2024-12-26"
   ```
 
 - **Apply DQ rules on a dataset via API**:
   ##### Start the API server
   ```sh
-    python dqml_app/dqml_app_api.py --env "dev"
+    dqml-app-api --env "dev"
   ```
   ##### Invoke the API endpoint
   ```sh
@@ -77,16 +81,8 @@ These are metadata that would be captured via the DQ application UI and stored i
 {
     "datasets": [
       {
-        "dataset_id": "1",
-        "catalog_ind": true,
-        "file_delim": ",",
-        "file_path": "APP_ROOT_DIR/data/assets.csv",
-        "schedule_id": null, 
-        "dq_rule_ids": null, 
-        "model_parameters": null 
-      },
-      {
         "dataset_id": "2",
+        "dataset_kind": "local delim file",
         "catalog_ind": true,
         "file_delim": ",",
         "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv",
@@ -122,16 +118,9 @@ These are metadata that would be captured via the DQ application UI and stored i
             }
           ],
           "sample_size": 10000
-        }
-      },
-      {
-        "dataset_id": "3",
-        "catalog_ind": true,
-        "file_delim": ",",
-        "file_path": "APP_ROOT_DIR/data/customer.csv", 
-        "schedule_id": null, 
-        "dq_rule_ids": null, 
-        "model_parameters": null 
+        }, 
+        "recon_file_delim": "|", 
+        "recon_file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.recon" 
       }
     ]
   }
