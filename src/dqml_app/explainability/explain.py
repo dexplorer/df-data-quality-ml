@@ -5,7 +5,7 @@ import numpy as np
 import shap
 import matplotlib.pyplot as plt
 
-from dqml_app.settings import ConfigParms as sc
+from config.settings import ConfigParms as sc
 
 
 def get_shap_tree_explainer(model):
@@ -24,7 +24,9 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     _ax1 = shap.summary_plot(
         shap_values, data_for_prediction, show=False, plot_type="bar"
     )
-    summary_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_summary.png"
+    summary_plot_file = (
+        f"{sc.img_out_file_path}/dataset_id_{dataset_id}_shap_summary.png"
+    )
     plt.savefig(summary_plot_file, bbox_inches="tight")
     plt.clf()
     plt.close()
@@ -40,7 +42,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
         show=False,
         matplotlib=True,
     )
-    force_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_force.png"
+    force_plot_file = f"{sc.img_out_file_path}/dataset_id_{dataset_id}_shap_force.png"
     plt.savefig(force_plot_file, bbox_inches="tight")
     plt.clf()
     plt.close()
@@ -51,7 +53,9 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     # Print explanation object to see the values plotted in the waterfall plot
     # logging.debugexplanation)
     _ax3 = shap.plots.waterfall(explanation[0], show=False)
-    waterfall_plot_file = f"{sc.plot_path}/dataset_id_{dataset_id}_shap_waterfall.png"
+    waterfall_plot_file = (
+        f"{sc.img_out_file_path}/dataset_id_{dataset_id}_shap_waterfall.png"
+    )
     plt.savefig(waterfall_plot_file, bbox_inches="tight")
     plt.clf()
     plt.close()

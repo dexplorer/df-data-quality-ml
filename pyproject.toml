@@ -18,14 +18,7 @@ classifiers = [
 #license = "MIT"
 #license-files = ["LICEN[CS]E*"]
 dependencies = [
-  # standard 
-  "pytest",
-  "pytest-cov",
-  "pylint",
-  "black",
-  "ipython",
   # standard py app specific
-  "confuse",
   # app specific 
   "great-expectations == 1.3.0",
   "pandas >= 2.1.4",
@@ -40,6 +33,7 @@ dependencies = [
   "utils @ git+https://github.com/dexplorer/utils",
   "metadata @ git+https://github.com/dexplorer/df-metadata",
   "app_calendar @ git+https://github.com/dexplorer/df-app-calendar",
+  "config @ git+https://github.com/dexplorer/df-config",
 ]
 keywords = ["data", "quality", "etl", "elt", "framework", "governance"]
 
@@ -50,6 +44,14 @@ api = [
   ]
 cli = [
   "click",
+]
+test = [
+  # standard dev tools
+  "pytest",
+  "pytest-cov",
+  "pylint",
+  "black",
+  "ipython",
 ]
 
 [project.scripts]

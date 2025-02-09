@@ -2,12 +2,16 @@ import os
 import argparse
 import logging
 
-from dqml_app.settings import ConfigParms as sc
+from config.settings import ConfigParms as sc
+from config import settings as scg
 from dqml_app import dqml_app_core as dqc
 from utils import logger as ufl
 
 from fastapi import FastAPI
 import uvicorn
+
+#
+APP_ROOT_DIR = "/workspaces/df-data-quality-ml"
 
 app = FastAPI()
 
@@ -60,6 +64,7 @@ def main():
     logging.info(args)
     env = args["env"]
 
+    scg.APP_ROOT_DIR = APP_ROOT_DIR
     sc.load_config(env=env)
 
     script_name = os.path.splitext(os.path.basename(__file__))[0]

@@ -2,9 +2,13 @@ import logging
 import os
 
 import click
-from dqml_app.settings import ConfigParms as sc
+from config.settings import ConfigParms as sc
+from config import settings as scg
 from dqml_app import dqml_app_core as dqc
 from utils import logger as ufl
+
+#
+APP_ROOT_DIR = "/workspaces/df-data-quality-ml"
 
 
 # Create command group
@@ -24,7 +28,8 @@ def detect_anomalies(dataset_id: str, env: str, cycle_date: str):
     Detect anomalies in the dataset.
     """
 
-    sc.load_config(env)
+    scg.APP_ROOT_DIR = APP_ROOT_DIR
+    sc.load_config(env=env)
 
     script_name = os.path.splitext(os.path.basename(__file__))[0]
     ufl.config_logger(log_file_path_name=f"{sc.log_file_path}/{script_name}.log")

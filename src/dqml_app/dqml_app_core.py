@@ -14,6 +14,11 @@ import logging
 
 
 def detect_anomalies(dataset_id: str, cycle_date: str) -> dict[str, float]:
+    # Simulate getting the cycle date from API
+    # Run this from the parent app
+    if not cycle_date:
+        cycle_date = ed.get_cur_cycle_date()
+
     # Get dataset metadata
     # dataset = ds.LocalDelimFileDataset.from_json(dataset_id)
     dataset = ds.get_dataset_from_json(dataset_id=dataset_id)
@@ -31,6 +36,7 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> dict[str, float]:
     )
 
     # Get random samples of data for the specified dates
+    logging.info("Getting the data samples")
     data_current = da.query_random_sample(dataset=dataset, eff_date=cur_date)
     data_prior = pd.concat(
         [
@@ -60,6 +66,7 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> dict[str, float]:
     # logging.debug(feature_list)
 
     # Encode the features, here encode_feature returns a Dataframe
+    logging.info("Encoding features")
     encoded_features = [
         fe.encode_feature(data_all, column, feature)
         for column, feature in feature_list
@@ -80,10 +87,12 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> dict[str, float]:
     )
 
     # Train a ML model using the features and response variable
+    logging.info("Training the model")
     model = xgb.XGBClassifier(early_stopping_rounds=10)
     model.fit(X_train, y_train, eval_set=[(X_eval, y_eval)], verbose=False)
 
     # Obtain SHAP values to explain the model's predictions
+    logging.info("Explaining the model predictions")
     current_data_indices = [idx for idx, label_val in enumerate(y) if label_val == 1]
     data_for_prediction = X.loc[current_data_indices]
     # Get only a subset of observations for explainer

@@ -1,8 +1,8 @@
 # import datetime as dt
 from metadata import dataset as ds
-from dqml_app.settings import ConfigParms as sc
+from config.settings import ConfigParms as sc
 from app_calendar import eff_date as ed
-from utils import file_io as uff
+from utils import csv_io as ufc
 from utils import spark_io as ufs
 import random
 import pandas as pd
@@ -21,7 +21,7 @@ def query_random_sample(dataset: ds.Dataset, eff_date: str) -> pd.DataFrame:
             dataset.resolve_file_path(eff_date_yyyymmdd)
         )
         logging.info("Reading the file %s", src_file_path)
-        src_data_records = uff.uf_read_delim_file_to_list_of_dict(
+        src_data_records = ufc.uf_read_delim_file_to_list_of_dict(
             file_path=src_file_path
         )
 
@@ -32,7 +32,7 @@ def query_random_sample(dataset: ds.Dataset, eff_date: str) -> pd.DataFrame:
         src_data_records = ufs.read_spark_table_into_list_of_dict(
             qual_target_table_name=qual_target_table_name,
             cur_eff_date=eff_date,
-            warehouse_path=sc.warehouse_path,
+            warehouse_path=sc.hive_warehouse_path,
         )
 
     sample_size = dataset.model_parameters.sample_size
