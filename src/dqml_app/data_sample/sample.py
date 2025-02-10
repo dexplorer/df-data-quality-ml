@@ -7,7 +7,7 @@ from utils import spark_io as ufs
 import random
 import pandas as pd
 import logging
-
+import os 
 
 def query_random_sample(dataset: ds.Dataset, eff_date: str) -> pd.DataFrame:
     # table: str, time_column: str, eff_date: dt.date, sample_size: int
@@ -20,10 +20,13 @@ def query_random_sample(dataset: ds.Dataset, eff_date: str) -> pd.DataFrame:
         src_file_path = sc.resolve_app_path(
             dataset.resolve_file_path(eff_date_yyyymmdd)
         )
-        logging.info("Reading the file %s", src_file_path)
-        src_data_records = ufc.uf_read_delim_file_to_list_of_dict(
-            file_path=src_file_path
-        )
+        if os.path.exists(src_file_path):
+            logging.info("Reading the file %s", src_file_path)
+            src_data_records = ufc.uf_read_delim_file_to_list_of_dict(
+                file_path=src_file_path
+            )
+        else:
+            logging.info("File %s does not exist. Skipping the file.", src_file_path)
 
     elif dataset.kind == ds.DatasetKind.SPARK_TABLE:
         # Read the spark table
