@@ -61,7 +61,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     plt.close()
 
 
-def compute_column_scores(shap_values, feature_names: list):
+def compute_column_scores(shap_values, feature_names: list) -> list[dict]:
     df = pd.DataFrame(shap_values, columns=feature_names)
     vals = np.abs(df.values).mean(0)
 
