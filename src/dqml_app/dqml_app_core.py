@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 
 from metadata import dataset as ds
+from metadata import dataset_dq_model_parms as dqmp
 from app_calendar import eff_date as ed
 
 # import data
@@ -23,6 +24,7 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> list[dict]:
     # Get dataset metadata
     # dataset = ds.LocalDelimFileDataset.from_json(dataset_id)
     dataset = ds.get_dataset_from_json(dataset_id=dataset_id)
+    dq_mdl_parm = dqmp.DatasetDQModelParameters.from_json(dataset_id=dataset_id)
 
     # Get current effective date
     cur_date = ed.get_cur_eff_date(
@@ -32,16 +34,16 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> list[dict]:
     # Get prior effective dates
     prior_dates = ed.get_prior_eff_dates(
         schedule_id=dataset.schedule_id,
-        snapshots=dataset.model_parameters.hist_data_snapshots,
+        snapshots=dq_mdl_parm.model_parameters.hist_data_snapshots,
         cycle_date=cycle_date,
     )
 
     # Get random samples of data for the specified dates
     logging.info("Getting the data samples")
-    data_current = da.query_random_sample(dataset=dataset, eff_date=cur_date)
+    data_current = da.query_random_sample(dataset=dataset, dq_mdl_parm=dq_mdl_parm, eff_date=cur_date)
     data_prior = pd.concat(
         [
-            da.query_random_sample(dataset=dataset, eff_date=prior_date)
+            da.query_random_sample(dataset=dataset, dq_mdl_parm=dq_mdl_parm, eff_date=prior_date)
             for prior_date in prior_dates
         ],
         axis="index",
@@ -69,7 +71,7 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> list[dict]:
         feature_list = [
             (
                 column,
-                fe.determine_features(column=column, dataset=dataset),
+                fe.determine_features(column=column, dq_mdl_parm=dq_mdl_parm),
             )
             for column in data_all.columns
         ]

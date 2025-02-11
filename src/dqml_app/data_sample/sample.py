@@ -1,5 +1,6 @@
 # import datetime as dt
 from metadata import dataset as ds
+from metadata import dataset_dq_model_parms as dqmp
 from config.settings import ConfigParms as sc
 from app_calendar import eff_date as ed
 from utils import csv_io as ufc
@@ -11,7 +12,7 @@ import os
 
 
 def query_random_sample(
-    dataset: ds.LocalDelimFileDataset | ds.SparkTableDataset, eff_date: str
+    dataset: ds.LocalDelimFileDataset | ds.SparkTableDataset, dq_mdl_parm: dqmp.DatasetDQModelParameters, eff_date: str
 ) -> pd.DataFrame:
     # table: str, time_column: str, eff_date: dt.date, sample_size: int
 
@@ -42,7 +43,7 @@ def query_random_sample(
             warehouse_path=sc.hive_warehouse_path,
         )
 
-    sample_size = dataset.model_parameters.sample_size
+    sample_size = dq_mdl_parm.model_parameters.sample_size
     if sample_size < len(src_data_records):
         df = pd.DataFrame.from_dict(random.sample(src_data_records, sample_size))
     else:

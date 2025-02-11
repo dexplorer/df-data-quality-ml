@@ -1,12 +1,13 @@
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 
-from metadata import dataset as ds
+# from metadata import dataset as ds
+from metadata import dataset_dq_model_parms as dqmp
 
 
-def determine_features(column: str, dataset: ds.Dataset):
+def determine_features(column: str, dq_mdl_parm: dqmp.DatasetDQModelParameters):
     feature_name = "not_a_feature"
-    for feature in dataset.model_parameters.features:
+    for feature in dq_mdl_parm.model_parameters.features:
         if column == feature.column:
             if feature.encoding == "frequency":
                 feature_name = f"{column}_freq_encode"
