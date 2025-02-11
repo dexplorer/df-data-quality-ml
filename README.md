@@ -85,9 +85,33 @@ These are metadata that would be captured via the DQ application UI and stored i
         "dataset_kind": "local delim file",
         "catalog_ind": true,
         "file_delim": ",",
-        "file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.csv",
+        "file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.csv",
         "schedule_id": "2",
-        "dq_rule_ids": [], 
+        "recon_file_delim": "|", 
+        "recon_file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.recon" 
+      },
+      {
+        "dataset_id": "14",
+        "dataset_kind": "local delim file",
+        "catalog_ind": true,
+        "file_delim": "|",
+        "file_path": "APP_DATA_OUT_DIR/asset_value_agg_yyyymmdd.dat", 
+        "schedule_id": "2", 
+        "recon_file_delim": null, 
+        "recon_file_path": null 
+      } 
+    ]
+  }
+
+```
+
+  ##### dataset dq model parameters
+
+```
+{
+    "dq_model_parms": [
+      {
+        "dataset_id": "2",
         "model_parameters": {
           "features": [
             {
@@ -118,12 +142,36 @@ These are metadata that would be captured via the DQ application UI and stored i
             }
           ],
           "sample_size": 10000
-        }, 
-        "recon_file_delim": "|", 
-        "recon_file_path": "APP_ROOT_DIR/data/acct_positions_yyyymmdd.recon" 
-      }
+        } 
+      },
+      {
+        "dataset_id": "14",
+        "model_parameters": {
+          "features": [
+            {
+              "column": "asset_type",
+              "variable_type": "category",
+              "variable_sub_type": "nominal",
+              "encoding": "one hot"
+            },
+            {
+              "column": "asset_value_agg",
+              "variable_type": "numeric",
+              "variable_sub_type": "float",
+              "encoding": "numeric"
+            }
+          ],
+          "hist_data_snapshots": [
+            {
+              "snapshot": "t-1d"
+            }
+          ],
+          "sample_size": 10000
+        } 
+      } 
     ]
   }
+
 ```
 
 ### Sample Output 
