@@ -82,24 +82,24 @@ These are metadata that would be captured via the DQ application UI and stored i
     "datasets": [
       {
         "dataset_id": "2",
-        "dataset_kind": "local delim file",
+        "dataset_type": "local delim file",
         "catalog_ind": true,
         "file_delim": ",",
         "file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.csv",
         "schedule_id": "2",
-        "recon_file_delim": "|", 
-        "recon_file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.recon" 
+        "recon_file_delim": "|",
+        "recon_file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.recon"
       },
       {
         "dataset_id": "14",
-        "dataset_kind": "local delim file",
+        "dataset_type": "local delim file",
         "catalog_ind": true,
         "file_delim": "|",
-        "file_path": "APP_DATA_OUT_DIR/asset_value_agg_yyyymmdd.dat", 
-        "schedule_id": "2", 
-        "recon_file_delim": null, 
-        "recon_file_path": null 
-      } 
+        "file_path": "APP_DATA_OUT_DIR/asset_value_agg_yyyymmdd.dat",
+        "schedule_id": "2",
+        "recon_file_delim": null,
+        "recon_file_path": null
+      }
     ]
   }
 
