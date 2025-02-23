@@ -14,12 +14,12 @@ Model output is explained using SHAP values and plots. Application can be invoke
 
 - **Apply DQ rules on a dataset via CLI**:
   ```sh
-    dqml-app-cli detect-anomalies --dataset_id "2" --env "dev"
+    dqml-app-cli detect-anomalies --dataset_id "dataset_2" --env "dev"
   ```
 
 - **Apply DQ rules on a dataset via CLI with cycle date override**:
   ```sh
-    dqml-app-cli detect-anomalies --dataset_id "2" --env "dev" --cycle_date "2024-12-26"
+    dqml-app-cli detect-anomalies --dataset_id "dataset_2" --env "dev" --cycle_date "2024-12-26"
   ```
 
 - **Apply DQ rules on a dataset via API**:
@@ -32,8 +32,8 @@ Model output is explained using SHAP values and plots. Application can be invoke
     https://<host name with port number>/detect-anomalies/?dataset_id=<value>
     https://<host name with port number>/detect-anomalies/?dataset_id=<value>&cycle_date=<value>
 
-    /detect-anomalies/?dataset_id=2
-    /detect-anomalies/?dataset_id=2&cycle_date=2024-12-26
+    /detect-anomalies/?dataset_id=dataset_2
+    /detect-anomalies/?dataset_id=dataset_2&cycle_date=2024-12-26
   ```
   ##### Invoke the API from Swagger Docs interface
   ```sh
@@ -76,42 +76,40 @@ effective_date,account_id,asset_id,asset_value
 ### API Data (simulated)
 These are metadata that would be captured via the DQ application UI and stored in a database.
 
-  ##### datasets 
+  ##### Datasets 
 ```
 {
-    "datasets": [
-      {
-        "dataset_id": "2",
-        "dataset_type": "local delim file",
-        "catalog_ind": true,
-        "file_delim": ",",
-        "file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.csv",
-        "schedule_id": "2",
-        "recon_file_delim": "|",
-        "recon_file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.recon"
-      },
-      {
-        "dataset_id": "14",
-        "dataset_type": "local delim file",
-        "catalog_ind": true,
-        "file_delim": "|",
-        "file_path": "APP_DATA_OUT_DIR/asset_value_agg_yyyymmdd.dat",
-        "schedule_id": "2",
-        "recon_file_delim": null,
-        "recon_file_path": null
-      }
-    ]
-  }
+  "datasets": [
+    {
+      "dataset_id": "dataset_2",
+      "dataset_type": "local delim file",
+      "file_delim": ",",
+      "file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.csv",
+      "schedule_id": "schedule_2",
+      "recon_file_delim": "|",
+      "recon_file_path": "APP_DATA_IN_DIR/acct_positions_yyyymmdd.recon"
+    },
+    {
+      "dataset_id": "dataset_14",
+      "dataset_type": "local delim file",
+      "file_delim": "|",
+      "file_path": "APP_DATA_OUT_DIR/asset_value_agg_yyyymmdd.dat",
+      "schedule_id": "schedule_2",
+      "recon_file_delim": null,
+      "recon_file_path": null
+    }
+  ]
+}
 
 ```
 
-  ##### dataset dq model parameters
+  ##### Dataset DQ Model Parameters
 
 ```
 {
     "dq_model_parms": [
       {
-        "dataset_id": "2",
+        "dataset_id": "dataset_2",
         "model_parameters": {
           "features": [
             {
@@ -145,7 +143,7 @@ These are metadata that would be captured via the DQ application UI and stored i
         } 
       },
       {
-        "dataset_id": "14",
+        "dataset_id": "dataset_14",
         "model_parameters": {
           "features": [
             {
@@ -268,7 +266,7 @@ Each column represent a feature. There are 4 features.
 #### SHAP value plots
 
 ##### Summary Plot (All Samples)
-![dataset_id_2_shap_summary](https://github.com/dexplorer/df-data-quality-ml/blob/059049f136c6079da00e0d9bd038b333b33d2406/dqml_app/plot/dataset_id_2_shap_summary.png)
+![dataset_2_shap_summary](docs/dataset_2_shap_summary.png)
 
 
 "feature_name": "asset_value",
@@ -281,7 +279,7 @@ Each column represent a feature. There are 4 features.
 
 
 ##### Waterfall Plot (1 Sample) 
-![dataset_id_2_shap_waterfall](https://github.com/dexplorer/df-data-quality-ml/blob/059049f136c6079da00e0d9bd038b333b33d2406/dqml_app/plot/dataset_id_2_shap_waterfall.png)
+![dataset_2_shap_waterfall](docs/dataset_2_shap_waterfall.png)
 
 
 "feature_name": "asset_value",
