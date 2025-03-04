@@ -3,6 +3,16 @@
 This application implements an ML model to detect anomalies in the datasets. ML model is a Gradient Boosting Decision Tree Classifier. It tries to classify the data records as current vs prior day data. Anomalies are detected when the model classifies any record as current day data (i.e. they look different from the prior day snapshots of the same dataset).
 Model output is explained using SHAP values and plots. Application can be invoked using CLI or REST API end points. This allows the app to be integrated into a larger data ingestion / distribution framework.
 
+### Define the environment variables
+
+Create a .env file with the following variables.
+
+```
+ENV=dev
+APP_ROOT_DIR=
+
+```
+
 ### Install
 
 - **Install via Makefile and pip**:
@@ -14,18 +24,18 @@ Model output is explained using SHAP values and plots. Application can be invoke
 
 - **Apply DQ rules on a dataset via CLI**:
   ```sh
-    dqml-app-cli detect-anomalies --dataset_id "dataset_2" --env "dev"
+    dqml-app-cli detect-anomalies --dataset_id "dataset_2"
   ```
 
 - **Apply DQ rules on a dataset via CLI with cycle date override**:
   ```sh
-    dqml-app-cli detect-anomalies --dataset_id "dataset_2" --env "dev" --cycle_date "2024-12-26"
+    dqml-app-cli detect-anomalies --dataset_id "dataset_2" --cycle_date "2024-12-26"
   ```
 
 - **Apply DQ rules on a dataset via API**:
   ##### Start the API server
   ```sh
-    dqml-app-api --env "dev"
+    dqml-app-api
   ```
   ##### Invoke the API endpoint
   ```sh

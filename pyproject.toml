@@ -29,10 +29,10 @@ dependencies = [
   "shap == 0.46.0",
   "matplotlib == 3.10.0",
 # my packages
-  "utils @ git+https://github.com/dexplorer/utils",
-  "metadata @ git+https://github.com/dexplorer/df-metadata",
-  "app_calendar @ git+https://github.com/dexplorer/df-app-calendar",
-  "config @ git+https://github.com/dexplorer/df-config",
+  #"utils @ git+https://github.com/dexplorer/utils",
+  #"metadata @ git+https://github.com/dexplorer/df-metadata",
+  #"app_calendar @ git+https://github.com/dexplorer/df-app-calendar",
+  #"config @ git+https://github.com/dexplorer/df-config",
 ]
 keywords = ["data", "quality", "etl", "elt", "framework", "governance"]
 

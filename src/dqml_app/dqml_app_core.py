@@ -40,10 +40,14 @@ def detect_anomalies(dataset_id: str, cycle_date: str) -> list[dict]:
 
     # Get random samples of data for the specified dates
     logging.info("Getting the data samples")
-    data_current = da.query_random_sample(dataset=dataset, dq_mdl_parm=dq_mdl_parm, eff_date=cur_date)
+    data_current = da.query_random_sample(
+        dataset=dataset, dq_mdl_parm=dq_mdl_parm, eff_date=cur_date
+    )
     data_prior = pd.concat(
         [
-            da.query_random_sample(dataset=dataset, dq_mdl_parm=dq_mdl_parm, eff_date=prior_date)
+            da.query_random_sample(
+                dataset=dataset, dq_mdl_parm=dq_mdl_parm, eff_date=prior_date
+            )
             for prior_date in prior_dates
         ],
         axis="index",

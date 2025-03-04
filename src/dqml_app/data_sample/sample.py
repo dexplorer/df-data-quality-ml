@@ -12,7 +12,9 @@ import os
 
 
 def query_random_sample(
-    dataset: ds.LocalDelimFileDataset | ds.SparkTableDataset, dq_mdl_parm: dqmp.DatasetDQModelParameters, eff_date: str
+    dataset: ds.LocalDelimFileDataset | ds.SparkTableDataset,
+    dq_mdl_parm: dqmp.DatasetDQModelParameters,
+    eff_date: str,
 ) -> pd.DataFrame:
     # table: str, time_column: str, eff_date: dt.date, sample_size: int
 

@@ -24,9 +24,7 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     _ax1 = shap.summary_plot(
         shap_values, data_for_prediction, show=False, plot_type="bar"
     )
-    summary_plot_file = (
-        f"{sc.img_out_file_path}/{dataset_id}_shap_summary.png"
-    )
+    summary_plot_file = f"{sc.img_out_file_path}/{dataset_id}_shap_summary.png"
     plt.savefig(summary_plot_file, bbox_inches="tight")
     plt.clf()
     plt.close()
@@ -51,11 +49,9 @@ def plot_shap_values(explainer, shap_values, data_for_prediction, dataset_id):
     _fig3, _ax3 = plt.subplots()
     explanation = explainer(data_for_prediction)
     # Print explanation object to see the values plotted in the waterfall plot
-    # logging.debugexplanation)
+    # logging.debug(explanation)
     _ax3 = shap.plots.waterfall(explanation[0], show=False)
-    waterfall_plot_file = (
-        f"{sc.img_out_file_path}/{dataset_id}_shap_waterfall.png"
-    )
+    waterfall_plot_file = f"{sc.img_out_file_path}/{dataset_id}_shap_waterfall.png"
     plt.savefig(waterfall_plot_file, bbox_inches="tight")
     plt.clf()
     plt.close()
