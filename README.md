@@ -22,17 +22,17 @@ APP_ROOT_DIR=
 
 ### Usage Examples
 
-- **Apply DQ rules on a dataset via CLI**:
+- **Detect DQ anomalies on a dataset via CLI**:
   ```sh
     dqml-app-cli detect-anomalies --dataset_id "dataset_2"
   ```
 
-- **Apply DQ rules on a dataset via CLI with cycle date override**:
+- **Detect DQ anomalies on a dataset via CLI with cycle date override**:
   ```sh
     dqml-app-cli detect-anomalies --dataset_id "dataset_2" --cycle_date "2024-12-26"
   ```
 
-- **Apply DQ rules on a dataset via API**:
+- **Detect DQ anomalies on a dataset via API**:
   ##### Start the API server
   ```sh
     dqml-app-api
