@@ -28,6 +28,7 @@ dependencies = [
   "scikit-learn[pre_processing]",
   "shap == 0.46.0",
   "matplotlib == 3.10.0",
+  "python-dotenv", 
 # my packages
   #"utils @ git+https://github.com/dexplorer/utils",
   #"metadata @ git+https://github.com/dexplorer/df-metadata",
