@@ -29,7 +29,12 @@ dependencies = [
   "shap == 0.46.0",
   "matplotlib == 3.10.0",
   "python-dotenv", 
-# my packages
+  # my packages
+  "utils",
+  "metadata",
+  "app_calendar",
+  "config",
+  # my packages
   #"utils @ git+https://github.com/dexplorer/utils",
   #"metadata @ git+https://github.com/dexplorer/df-metadata",
   #"app_calendar @ git+https://github.com/dexplorer/df-app-calendar",

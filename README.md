@@ -9,7 +9,8 @@ Create a .env file with the following variables.
 
 ```
 ENV=dev
-APP_ROOT_DIR=
+APP_ROOT_DIR=/workspaces/df-data-quality-ml
+NAS_ROOT_DIR=/workspaces/nas
 
 ```
 
